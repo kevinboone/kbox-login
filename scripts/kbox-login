@@ -1,0 +1,16 @@
+#/bin/sh
+. /etc/kbox-passwd
+for x in `seq 1 3`; do
+  echo -n "login: "
+  read TRY_USER
+  echo -n "password: "
+  stty -echo
+  read TRY_PASSWORD
+  stty echo
+  if [[ "$TRY_USER" = "$USER" && "$TRY_PASSWORD" = "$PASSWORD" ]]; then
+    echo ""
+    exec /bin/sh -
+  fi
+  echo ""
+done
+
